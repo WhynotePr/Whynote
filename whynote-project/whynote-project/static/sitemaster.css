@@ -1,0 +1,20 @@
+.page-footer .footer-links {
+  text-align: right;
+}
+
+.wrapper-body, .wrapper-header{
+	display: grid;
+	grid-template-columns: 25% 60% 15%;
+	grid-template-rows: ;
+	border-bottom: 1px solid #dfdfdf;
+}
+
+
+.grid-item{
+	border-right:1px solid #dfdfdf;
+}
+
+.maprout, .notefield, .toolbar{
+	overflow: auto;
+	height: 400px;
+}
