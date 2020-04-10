@@ -17,3 +17,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.author_name
+
+class Tabsettings(models.Model):
+    textcolor = models.CharField('Text color', max_length = 20)
+    bgcolor = models.CharField('Background color', max_length = 20)
+    textstyle = models.CharField('Text style', max_length = 20)
+    fontfamily = models.CharField('Font family', max_length = 50)
+    fontsize = models.IntegerField('Font size', max_length = 10)

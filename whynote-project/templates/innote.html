@@ -4,10 +4,8 @@
 
 {% block content %}
 
-<h2 style="font-family: Montserrat">{{note.note_title}}</h2>
-
-<p style="font-family: Montserrat">{{note.note_text}}</p>
-
-<em style="font-family: Montserrat">{{note.public_date}}</em>
+<h2>{{note.note_title}}</h2>
+<p style = "font-size: {{fontsize}}pt">{{note.note_text}}</p>
+<em>{{note.public_date}}</em>
 
 {% endblock %}

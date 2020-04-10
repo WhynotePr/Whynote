@@ -1,14 +1,15 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+<font color = {{textcolor}} style = "font-style:{{textstyle}};font-family: {{fontfamily}};">
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="{% static 'sitemaster.css' %}" 
-	type="text/css">
+	<link rel="stylesheet" href="{% static 'sitemaster.css' %}" type="text/css">
 	<title>{% block title %}Whynote{% endblock %}</title>
 </head>
-<body bgcolor=#E8E8E8>
+<body bgcolor = {{bgcolor}}>
 	{% block content %}
 	{% endblock%}
 </body>
+</font>
 </html>

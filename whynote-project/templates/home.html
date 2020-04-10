@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 	<h1 style="font-family: Montserrat, sans-serif">
 		WhyNote
 	</h1>
@@ -18,7 +19,9 @@
   			</h3>
   		</div>
   		<div class = "grid-item header settings">
+
   			<h4 style="font-family:Montserrat, sans-serif; padding: 0em 0.6em">Settings</h4>
+        
   		</div>
   	</div>
 <main>
@@ -26,25 +29,26 @@
 	<div class="grid-item body maprout">
   		<h4 style="font-family:Montserrat, sans-serif">Folders</h4>
   			<p style="font-family:Montserrat, sans-serif">
-  				New Forder
-  				<p>
-  			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  			consequat. 
-  			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  			consequat. 
-  			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  			consequat. 
-  			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  			consequat. 
-  			</p>
+        <font style="font-family:fantasy; color:#B57EDC;">
+  				<div class="dropdown">
+          <span>Math</span>
+          <div class="dropdown-content">
+            <a href = "{% url 'whynote:folder' %}"><p>Geometry</p></a>
+            <a href = "{% url 'whynote:folder' %}"><p>Calculus</p></a>
+            <a href = "{% url 'whynote:folder' %}"><p>Algebra</p></a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <span>Biology</span>
+          <div class="dropdown-content">
+            
+              <a href = "{% url 'whynote:folder' %}"><p>Skin</p></a>
+              <a href = "{% url 'whynote:folder' %}"><p>Bones</p></a>
+              <a href = "{% url 'whynote:folder' %}"><p>Heart</p></a>
+            
+          </div>
+        </div>
+        </font>
   			</p>
   	</div>
   	<div class="grid-item body notefield">
@@ -52,12 +56,28 @@
   			Notes
   		</h3>
 		{% for nt in latest_notes %}
-		<a href="{% url 'whynote:detail' nt.id%}" style="font-family:Montserrat, sans-serif; color:#FB573D; padding: 0em 1.25em;
+		<a href="{% url 'whynote:detail' nt.id %}" style="font-family:Montserrat, sans-serif; color:#FB573D; padding: 0em 1.25em;
 			text-decoration: none;
 		 	text-align: center">
 		 {{nt.note_title}}</a><br>
-	{% endfor %}
+	  {% endfor %}
+
+    <div class = "grid-item body add_note_button">
+        <a href="{% url 'whynote:post_new' %}" 
+        style="font-family:Montserrat, sans-serif; text-decoration: none;
+        background-color: #575757;
+        color: red; padding: 0.25em 0.5em;margin: 20%; margin-top: 30%">
+          +
+        </a>
+      </div>
+    
 	</div>
+  <div class = "grid-item body settings">
+        <a href = "{% url 'whynote:tab_set' %}">Text and background</a>
+            
+          
+    </div>
+  </div>
   </div>
 </main>
 </main>
@@ -78,6 +98,6 @@
       </div>
     </div>
   </footer>
-</body>
+
 </html>
 {% endblock %}
