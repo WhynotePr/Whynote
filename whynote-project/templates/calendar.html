@@ -1,4 +1,24 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-{% endblock %}
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{% static 'calendarstyle.css' %}" type="text/css">
+  <title>WhyCalendar</title>
+</head>
+
+
+<body>
+<div class="clearfix">
+  <a class="btnleft" href="{% url 'whynote:calendar' %}?{{prev_month}}"> 
+    Previous Month 
+  </a>
+  <a class="btnright" href="{% url 'whynote:calendar' %}?{{next_month}}">  
+    Next Month 
+  </a>
+  <a class="btnright" href="{% url 'whynote:event_new' %}"> New Event </a>
+</div>
+  {{calendar}}
+</body>
+</html>
