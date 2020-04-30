@@ -71,10 +71,10 @@ body {
 .button,.calendar{
   text-align: center;
   border-radius: 10px;
-  padding-bottom:3px;
   background-color: #575757;
   height: 40px;
 }
+
 .button a{
   font-size: 300%;
   text-align: center;
@@ -82,9 +82,10 @@ body {
   color: white;
   text-decoration: none;
 }
+
 .calendar a{
-  font-size: 130%;
-  margin-top: 5px;
+  font-size: 140%;
+  margin-top: 10px;
   font-family: Montserrat, sans-serif;
   color: white;
   text-align: center;

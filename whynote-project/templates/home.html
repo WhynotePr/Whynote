@@ -1,71 +1,65 @@
 {% extends 'base.html' %}
+
 {% block content %}
 
-	<h1>
-		WhyNote
-	</h1>
-	<div class="wrapper-header">
-    <div class = "grid-item header date">
-        <p></p>
-      </div>
-  		<div class = "grid-item header calendar">
-  			<a href="{% url 'whynote:calendar_button' %}">Calendar</a>
-  		</div>
-  		<div class = "grid-item header folders">
-  			<h3> Folders' names </h3>
-  		</div>
-      <div class = "grid-item header button">
-        <a href="{% url 'whynote:post_new' %}"> + </a>
-      </div>
-  		<div class = "grid-item header settings">
-  			<h3> Settings </h3>
-  		</div>
-  	</div>
-<main>
-<div class="wrapper-body">
-	<div class="grid-item body maprout">
-  		<h3>Folders</h3>
-  			<p>
-  				<div class="dropdown">
-          <span>Math</span>
-          <div class="dropdown-content">
-            <a href = "{% url 'whynote:folder' %}"><p>Geometry</p></a>
-            <a href = "{% url 'whynote:folder' %}"><p>Calculus</p></a>
-            <a href = "{% url 'whynote:folder' %}"><p>Algebra</p></a>
+  <div class = "container">
+    <div class = "row">
+      <div class="col-2"><h4>Folders</h4></div>
+      <div class="col-9">
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="true">All</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-f2" role="tab" aria-controls="nav-f2" aria-selected="false">Folder 2</a>
           </div>
+      </nav>
+      </div>
+      <div class="col-1">...</div>
+    </div>
+    <div class="row" >
+      <div class="col-2">...</div>
+      <div class="col-9 main">
+        <div class="tab-content" id="nav-tabContent" >
+          <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab" >
+        <div class="row row-cols-1 row-cols-md-3"  >
+
+          {% for nt in latest_notes %}
+            <div class="col mb-3">
+              <div class="card bg-light mb-3" style="max-width: 15rem;">
+                <div class="card-header"><p> {{nt.public_date}} </p></div>
+                <div class="card-body text-info">
+                  <h5 class="card-title"> <a href="{% url 'whynote:detail' nt.id %}" >{{nt.note_title}} </a></h5>
+                  
+                </div>
+              </div>
+            </div>
+          {% endfor %}
         </div>
-  			</p>
-  	</div>
-  	<div class="grid-item body notefield">
-<ul>
-		{% for nt in latest_notes %}
-		<li><a href="{% url 'whynote:detail' nt.id %}" >
-		 {{nt.note_title}}</a>
-     <p> {{nt.public_date}} </p>
-    </li>
-	  {% endfor %}
-</ul>
-    
-	</div>
-  <div class = "grid-item body settings">
-        <a href = "{% url 'whynote:tab_set' %}">Text and background</a>
+
+      </div>
+      <div class="tab-pane fade" id="nav-f2" role="tabpanel" aria-labelledby="nav-f2-tab">Hi</div>
+      </div>
+      </div>
+      <div class="col-1">...</div>
+    </div>
+
   </div>
-</main>
 
   <footer class="page-footer">
-    <div class="footer-container">
-        <div class="footer-child copyright">
-          WhyNote © 2020 All Rights Reserved
+    <div class="footer container">
+      <div class="row">
+        <div class="col-6 footer-child copyright  ">
+        <p class="text-right">WhyNote © 2020 All Rights Reserved</p>
         </div>
-        <div class="footer-child footer-links">
-          Privacy Policy
-		  FAQ
+        <div class="col-6 footer-child footer-links ">
+          <p class="text-right">Privacy Policy
+      FAQ</p>
           <div>
-            <small>Made by WhyNote Team
+            <small >Made by WhyNote Team
             </small>
         </div>
       </div>
     </div>
+  </div>
   </footer>
 
 </html>

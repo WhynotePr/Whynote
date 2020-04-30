@@ -1,11 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse, reverse_lazy
+
 from django.views.generic.list import ListView
 from django.utils.safestring import mark_safe
 from datetime import timedelta, datetime
 from django.utils import timezone
 import calendar
+
+from django.core.files.storage import FileSystemStorage
 
 from .models import *
 from .utils import Calendar
@@ -22,14 +25,14 @@ def home(request, bgcol="#E8E8E8",
          textcol="black",
          textst="normal",
          textsi = "14"):
-    latest_notes_list = Note.objects.order_by('note_title')
+    latest_notes_list = Note.objects.order_by('-public_date')
     bgcolor = bgcol
     textcolor = textcol
     textstyle = textst
     textsize = textsi
     return render(request, 'home.html', {'latest_notes': latest_notes_list,
                                          'bgcolor': bgcol,
-                                         'textcolor':textcol,
+                                         'textcolor': textcol,
                                          'textstyle': textst,
                                          'fontfamily': fontfamily,
                                          'textsize': textsize})
@@ -40,6 +43,9 @@ def detail(request, note_id):
     except:
         raise Http404("The note is not found")
     return render(request, 'innote.html', {"note": nt})
+
+
+# For calendar
 
 def calendar_button(request):
     return render(request, 'calendar.html')
@@ -80,7 +86,6 @@ def next_month(d):
     return month
 
 def event(request, event_id=None):
-    instance = Event()
     if event_id:
         instance = get_object_or_404(Event, pk=event_id)
     else:
@@ -88,8 +93,9 @@ def event(request, event_id=None):
     form = EventForm(request.POST or None, instance=instance)
     if request.POST and form.is_valid():
         form.save()
-        return HttpResponseRedirect(reverse('calendar'))
+        return HttpResponseRedirect(reverse('whynote:calendar'))
     return render(request, 'event.html', {'form': form})
+
 
 def add_note_button(request):
     return render(request, 'add_note.html')
@@ -101,18 +107,19 @@ def post_new(request):
             post = form.save(commit=False)
             post.public_date = timezone.now()
             post.save()
-            return redirect('whynote:detail', note_id = post.pk)
+            return redirect('whynote:detail', note_id=post.pk)
     else:
         form = NoteForm()
     return render(request, 'add_note.html', {'form': form})
 
 # предпологается для осуществления папок, name - имя папки
-def folder(request,name):
-	return render(request,'folders.html', name)
+def folder(request, name):
+    return render(request, 'folders.html', name)
+
 def tab_set(request):
     if request.method != "POST":
         return render(request,'text_and_background_settings.html',
-                      {'form':TabForm(request.POST)})
+                      {'form': TabForm(request.POST)})
     else:
         form = TabForm(request.POST)
         global bgcolor,textcolor,textstyle,fontsize
@@ -122,20 +129,32 @@ def tab_set(request):
         textstyle = tabset.textstyle
         fontfamily = tabset.fontfamily
         fontsize = tabset.fontsize
-        return render(request,'home.html',
+        return render(request, 'home.html',
                       {'latest_notes': Note.objects.order_by('note_title'),
                        'bgcolor': bgcolor,
                        'textcolor': textcolor,
                        'fontfamily': fontfamily,
                        'fontsize': fontsize})
 
+# For uploading files
+def upload(request):
+    context = {}
+    if request.method == 'POST':
+        uploaded_file = request.FILES['document']
+        fs = FileSystemStorage()
+        name = fs.save(uploaded_file.name, uploaded_file)
+        url = fs.url(name)
+        context['url'] = fs.url(name)
+    return render(request, 'upload.html', context)
 
 
+def book_list(request):
+    return render(request, 'book_list.html')
+
+def upload_book(request):
+    form = BookForm()
+    return render(request, 'upload_book.html', {'form': form})
     
-
-
-
-
 
 
 
