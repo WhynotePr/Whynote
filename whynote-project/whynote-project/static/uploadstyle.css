@@ -1,0 +1,77 @@
+h1, h2, h3, h4,p{
+  font-family: Montserrat, sans-serif;
+}
+
+h1{
+    font-size: 40px;
+    text-shadow: #FFFFFF;
+}
+
+body {
+    font-family: Montserrat, sans-serif; 
+    background-color: #E8E8E8
+}
+
+.uploadtitle{
+	margin-top: 20px;
+	margin-left: 450px;
+}
+
+.fileform{
+	margin-left: 450px;
+}
+
+.fileform input, button{
+	font-size: 16px;
+}
+
+.files{
+	margin-top: 10px;
+	margin-left: 400px;
+}
+
+.files p{
+	font-size: 18px;
+}
+
+.btn{
+  text-align: center;
+  border-radius: 10px;
+  background-color: #575757;
+  font-family: Montserrat, sans-serif;
+  color: white;
+  height: 40px;
+}
+
+.left{
+  font-size: 14px;
+  width: 110px;
+  margin: 15px;
+  float: left;
+}
+
+.btn a{
+  font-size: 200%;
+  text-align: center; 
+  text-decoration: none;
+  color: white;
+  font-family: Montserrat, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #17a2b8;
+}
+
+.form {
+  margin: auto;
+}
+
+.form input, .form select, .form textarea{
+  border-radius: 5px;
+  border: 1px solid #404947;
+  outline: none;
+  background: none;
+  padding: 5px;
+  width: 100%;
+}

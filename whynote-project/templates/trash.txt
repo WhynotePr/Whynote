@@ -1,0 +1,73 @@
+<form action="greeting" method="post" style="font-family:Montserrat, 
+	sans-serif; text-align:right">
+	{% csrf_token %}
+	Enter the title of your note:<br>
+	<input type="text" name="name" style="padding: 12px 10px; 
+	margin: 8px 0; height: 10px; width: 120px; box-sizing: border-box;
+	border: 2.4px solid #555">
+	<input type="submit">
+</form>
+
+<h2 style="font-family: Montserrat">{{note.note_title}}</h2>
+<p style = "color:#FF5733; font-family: Montserrat
+ font-size: 22px">Your notes </p>
+
+def greeting(request):
+    person = (request.POST['name'])
+    return render(request, 'result.html', {"username": person})
+
+
+class EventAdmin(admin.ModelAdmin):
+    list_display = ['day', 'start_time', 'end_time', 'notes']
+    calendar_template = 'calendar.html'
+
+    def changelist_view(self, request, extra_context=None):
+        after_day = request.GET.get('day__gte', None)
+        extra_context = extra_context or {}
+
+        if not after_day:
+            d = datetime.date.today()
+        else:
+            try:
+                split_after_date = after_day.split('-')
+                d = datetime.date(year=int(split_after_day[0]),
+                                  month=int(split_after_day[1]), day=1)
+
+            except:
+                datetime.date.today()
+        #Finding the first day of current month
+        first_day = datetime.date(year=d.year, month=d.month, day=1)
+        #Backs up a single day
+        previous_month = first_day - datetime.timedelta(days=1)
+        #The first day of previous month
+        previous_month = datetime.date(year=previous_month.year,
+                                       month=previous_month.month,
+                                       day=1)
+        last_day = calendar.monthrange(d.year, d.month)
+        #Finding the last day of current month
+        last_curday = datetime.date(year=d.year, month=d.month,
+                                    day=last_day[1])
+        #Forward a single day
+        next_month = last_curday + datetime.timedelta(days=1)
+        #The first day of next month
+        next_month = datetime.date(year=next_month.year,
+                                   month=next_month.month,
+                                   day=1)
+        extra_context['previous_month'] = (reverse('calendar')
+                                           + '?day__gte=' + str(previous_month))
+        extra_context['next_month'] = (reverse('calendar')
+                                       + '?day__gte=' + str(next_month))
+
+        cal = HTMLCalendar()
+        html_calendar = cal.formatmonth(d.year, d.month, withyear=True)
+        html_calendar = html_calendar.replace('<td ',
+                                              '<td width="150" height="150"')
+        extra_context['calendarview'] = mark_safe(html_calendar)
+        return super(EventAdmin, self).changelist_view(request, extra_context)
+
+
+Calendar html/css
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">

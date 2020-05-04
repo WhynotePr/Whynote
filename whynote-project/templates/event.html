@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <!--link rel="stylesheet" href="{% static 'calendarstyle.css' %}" type="text/css"-->
+  <title>WhyEvent</title>
+</head>
+<style>
+body {
+font-family: Montserrat, sans-serif;
+background-color: #E8E8E8
+}
+
+a {
+  text-decoration: none;
+  color: #17a2b8;
+}
+
+.btn{
+  border-radius: 5px;
+  border: 7px solid #1abc9c;
+  padding: 10px;
+  outline: none;
+  text-transform: uppercase;
+  text-align: center;
+  color: black;
+  background-color: transparent;
+  box-shadow: 0 0 0 0;
+}
+
+.left{
+  font-size: 16px;
+  width: 100px;
+  margin: 10px;
+  float: left;
+}
+
+.right{
+  font-size: 14px;
+  width: 110px;
+  margin: 15px;
+  float: right;
+}
+.form {
+  margin: auto;
+}
+
+.form input, .form select, .form textarea {
+  border-radius: 5px;
+  border: 1px solid #1abc9c;
+  outline: none;
+  background: none;
+  padding: 5px;
+  width: 100%;
+}
+
+</style>
+
+<body bgcolor=#E8E8E8>
+<div class="clearfix">
+  <a class="btn btn-info left" href="{% url 'whynote:calendar' %}"> Calendar </a>
+</div>
+
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                {{ field.label }} <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ field.label }} <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+  <table class="form form-table">
+    {{ form }}
+    <tr><td colspan="2">
+      <button type="submit" class="btn btn-info right">
+        Save Event 
+      </button>
+    </td></tr>
+  </table>
+</form>
+</body>
+</html>

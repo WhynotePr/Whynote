@@ -149,10 +149,17 @@ def upload(request):
 
 
 def book_list(request):
-    return render(request, 'book_list.html')
+    books = Book.objects.all()
+    return render(request, 'book_list.html', {'books': books})
 
 def upload_book(request):
-    form = BookForm()
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('whynote:book_list')
+    else:
+        form = BookForm()
     return render(request, 'upload_book.html', {'form': form})
     
 
