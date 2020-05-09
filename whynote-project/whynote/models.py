@@ -16,6 +16,9 @@ class Note(models.Model):
 
     def __str__(self):
         return self.note_title
+
+    def preview(self):
+        return self.note_text[:120]
     
 class Comment(models.Model):
     note = models.ForeignKey(Note, on_delete = models.CASCADE)
@@ -90,8 +93,11 @@ class Book(models.Model):
     """Class for uploading files"""
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
+    
     #upload_to is a way of setting the upload directory and file name
     pdf = models.FileField(upload_to='pdfs/')
+
+    cover = models.ImageField(upload_to='pdfs/covers/', null=True, blank = True)
 
     def __str__(self):
         return self.title

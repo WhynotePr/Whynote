@@ -2,9 +2,14 @@
 
 {% block content %}
 
+  <div class="container">
   <div class="btn btn-warning left">
-    <a href="{% url 'whynote:home' %}" class="text-decoration-none text-danger">Back</a>
+    <a href="{% url 'whynote:home' %}" class="text-decoration-none text-dark">Back</a>
   </div>
+  <div class="btn btn-warning left">
+    <a href="{% url 'whynote:book_list' %}" class="text-decoration-none text-dark">Books</a>
+  </div>
+</div>
 
   <div class="uploadtitle">
 	<h2>Your files</h2>	

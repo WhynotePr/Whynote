@@ -10,20 +10,35 @@
 	<table class="table table-hover">
 	  <thead>
 		<tr>
+			<th>Cover</th>
 			<th>Title</th>
 			<th>Author</th>
 			<th>Download</th>
+			<th>Delete</th>
 		</tr>
 	  </thead>
 	  <tbody>
 	  	{% for book in books %}
 	  	<tr>
+	  	  <td>
+	  	  	{% if book.cover %}
+	  	  	<img src="{{ book.cover.url }}" alt="{{ book.title }}" style="width: 100px">
+	  	  	{% else %}
+	  	  	<span class="text-muted">No cover</span>
+	  	  	{% endif %}
+	  	  </td>
 	  	  <td>{{ book.title }}</td>
 	  	  <td>{{ book.author }}</td>
 	  	  <td>
 	  	  	<a href="{{ book.pdf.url }}" class="btn btn-warning btn-sm">
 	  	  		Download PDF
 	  	  	</a>
+	  	  </td>
+	  	  <td>
+	  	  	<form method="POST" action="{% url 'whynote:delete_book' book.pk %}">
+	  	  	  {% csrf_token %}
+	  	  	  <button type="submit" class="btn btn-danger">Delete</button>
+	  	  	</form>
 	  	  </td>
 	  	</tr>
 	  	{% endfor %}

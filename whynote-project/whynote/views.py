@@ -130,7 +130,7 @@ def tab_set(request):
         fontfamily = tabset.fontfamily
         fontsize = tabset.fontsize
         return render(request, 'home.html',
-                      {'latest_notes': Note.objects.order_by('note_title'),
+                      {'latest_notes': Note.objects.order_by('-public_date'),
                        'bgcolor': bgcolor,
                        'textcolor': textcolor,
                        'fontfamily': fontfamily,
@@ -161,9 +161,12 @@ def upload_book(request):
     else:
         form = BookForm()
     return render(request, 'upload_book.html', {'form': form})
-    
 
-
+def delete_book(request, pk):
+    if request.method == 'POST':
+        book = Book.objects.get(pk=pk)
+        book.delete()
+    return redirect('whynote:book_list')
 
 
 

@@ -1,9 +1,8 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<font color = {{textcolor}} style = "font-style:{{textstyle}};font-family: {{fontfamily}};">
+<font color = black style = "font-family: 'Oswald', 'Futura', sans-serif;">
 <head>
-	
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  <link rel="stylesheet" href="{% static 'sitemaster.css' %}" type="text/css">
@@ -11,15 +10,29 @@
  <title>{% block title %}Whynote{% endblock %}</title>
 
 </head>
+<style type="text/css">
+  
+  .sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+a{
+  text-decoration: none;
+}
+</style>
 
 
-<body bgcolor = {{bgcolor}}>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="{%url 'whynote:home'%}"><h1>Whynote</h1></a>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  <ul class="navbar-nav mr-auto">
+<body style="background-color: white">
+<div class="shadow p-1 mb-5 bg-dark" id="navbar_top">
+  <nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+  <a class="navbar-brand" href="{%url 'whynote:home'%}" style="font-size: 30px">Whynote</a>
+  <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+  <ul class="navbar-nav mr-auto text-right">
     <li class="nav-item">
-      <a class=" nav-link" href="{% url 'whynote:post_new' %}"> New Note</a> 
+      <a class="nav-link" href="{% url 'whynote:post_new' %}"> New Note</a> 
     </li>
      <li class="nav-item">
       <a class="nav-link" href="{% url 'whynote:calendar_button' %}">Calendar</a>
@@ -35,9 +48,14 @@
           <a class=" dropdown-item" href = "{% url 'whynote:tab_set' %}">Text and background</a>
         </div>
       </li>
+      <li class="nav-item">
+      <a class="nav-link" href="{% url 'whynote:book_list' %}">About us</a>
+    </li>
   </ul>
-</div>
+  </div>
+  </div>
   </nav>
+  </div>
  {% block content %}
 
  {% endblock%}
@@ -45,6 +63,22 @@
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+if ($(window).width() > 992) {
+  $(window).scroll(function(){  
+     if ($(this).scrollTop() > 40) {
+        $('#navbar_top').addClass("fixed-top");
+        // add padding top to show content behind navbar
+        $('body').css('padding-top', $('.navbar').outerHeight() + 'px');
+      }else{
+        $('#navbar_top').removeClass("fixed-top");
+         // remove padding top from body
+        $('body').css('padding-top', '0');
+      }   
+  });
+}
+</script>
 </body>
 </font>
 </html>
