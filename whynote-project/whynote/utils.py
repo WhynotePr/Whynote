@@ -22,7 +22,8 @@ class Calendar(HTMLCalendar):
         else:
             td = f'<td>'
         if day != 0:
-            return td + f'<div class="card"><div class="card-header text-right">'\
+            return td + f'<div class="card"><div class="card-header '\
+                   f'border-dark text-right">'\
                    f'{day}</div><div class="card-body">'\
                    f'<ul class="list-group list-group-flush">'\
                    f'{d}</ul></div></div></td>'

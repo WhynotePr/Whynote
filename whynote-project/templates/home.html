@@ -13,7 +13,7 @@
           </div>
       </nav>
       </div>
-      <div class="col-1"></div>
+      <div class="col-1"><a class="btn btn-warning" href="{% url 'whynote:post_new' %}">Create</a></div>
     </div>
     <div class="row" >
       <div class="col-2"></div>
@@ -26,9 +26,6 @@
             <div class="col mb-3">
               <div class="shadow-sm p-1 mb-5">
               <div class="card h-50 border-dark mb-3 text-dark" style="max-width: 15rem;">
-                <!--div class="card-header">
-                  <a href="{% url 'whynote:detail' nt.id %}">{{nt.note_title}} </a>
-                </div-->
                 <div class="card-body">
                   <h5 class="card-title"> 
                     <a class="text-info" href="{% url 'whynote:detail' nt.id %}">{{nt.note_title}} </a>
@@ -58,8 +55,7 @@
         <p class="text-right">WhyNote © 2020 All Rights Reserved</p>
         </div>
         <div class="col-6 footer-child footer-links ">
-          <p class="text-right">Privacy Policy
-      FAQ</p>
+          <p class="text-right">Privacy Policy FAQ</p>
           <div>
             <small >Made by WhyNote Team
             </small>

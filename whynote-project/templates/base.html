@@ -4,7 +4,8 @@
 <font color = black style = "font-family: 'Oswald', 'Futura', sans-serif;">
 <head>
  <meta charset="utf-8">
- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
+
  <link rel="stylesheet" href="{% static 'sitemaster.css' %}" type="text/css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
  <title>{% block title %}Whynote{% endblock %}</title>
@@ -24,16 +25,13 @@ a{
 </style>
 
 
-<body style="background-color: white">
+<header>
 <div class="shadow p-1 mb-5 bg-dark" id="navbar_top">
-  <nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="mb-1 navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
   <a class="navbar-brand" href="{%url 'whynote:home'%}" style="font-size: 30px">Whynote</a>
   <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
   <ul class="navbar-nav mr-auto text-right">
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'whynote:post_new' %}"> New Note</a> 
-    </li>
      <li class="nav-item">
       <a class="nav-link" href="{% url 'whynote:calendar_button' %}">Calendar</a>
     </li>
@@ -56,6 +54,14 @@ a{
   </div>
   </nav>
   </div>
+</header>
+
+{% block style %}
+  <style type="text/css">
+  </style>
+ {% endblock %}
+
+<body>
  {% block content %}
 
  {% endblock%}
