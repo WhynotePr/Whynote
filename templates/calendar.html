@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<style type="text/css">
+table {
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+.calendar {
+  caption-side: top;
+  padding: 0;
+}
+
+.month {
+  padding: 1rem;
+  background: lightgray;
+  text-align: center;
+}
+
+.month ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.month ul li {
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+.month .prev {
+  float: left;
+  padding-top: 10px;
+}
+
+.month .next {
+  float: right;
+  padding-top: 10px;
+}
+#calendar>tbody>tr>td {
+  padding: 0;
+}
+
+#calendar .card, #calendar .card-header{
+  border: 0;
+}
+
+ #calendar .card-header{
+  background-color: lightgray;
+}
+
+#calendar .active .card-header {
+  background: #ffc107;
+}
+
+.card{
+  height: 170px;
+  overflow: auto;
+}
+
+.card-text{
+  font-size: 19px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dayurl > a{
+  text-decoration: none;
+  color: black;
+}
+
+.list-numbered {
+  size: 17px;
+  list-style: none;
+  counter-reset: line;
+}
+
+.list-numbered > li {
+  position: relative;
+  margin-bottom: 1.5em;
+}
+
+.list-numbered > li:before {
+  position: absolute;
+  left: -2.25em;
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  margin-right: 0.5em;
+  background-color:  #ffc107;
+  border-radius: 50%;
+  color: black;
+  text-align: center;
+  line-height: 1.25em;
+  counter-increment: line;
+  content: counter(line);
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+  <div class="row" style="padding: 15px">
+    <div class="col-4">
+      <!-- <nav aria-label="">
+       <ul class="pagination">
+         <li class="page-item">
+            <a class="page-link text-info bg-light" href="{% url 'first:calendar' %}?{{prev_month}}">Previous</a>
+          </li>
+          <li class="page-item">
+             <a class="page-link text-dark bg-light" href="{% url 'first:calendar' %}">Today</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link text-info bg-light" href="{% url 'first:calendar' %}?{{next_month}}">Next</a>
+          </li>
+        </ul>
+      </nav> -->
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-outline-warning">
+         <a class="text-dark text-decoration-none" href="{% url 'first:calendar' %}?{{prev_month}}">Previous</a>
+        </label>
+        <label class="btn btn-outline-warning">
+          <a class="text-dark text-decoration-none" href="{% url 'first:calendar' %}">Today</a>
+        </label>
+        <label class="btn btn-outline-warning">
+          <a class="text-dark text-decoration-none" href="{% url 'first:calendar' %}?{{next_month}}">Next</a>
+        </label>
+      </div>
+    </div>
+    <div class="col-4">
+        <h2> Calendar </h2>
+      </div>
+      <div class="col-4">
+        <div class="d-flex justify-content-end">
+        <a href="{% url 'first:event_new' %}" class="btn btn-outline-warning text-dark text-decoration-none" role="button">New event</a>
+      </div>
+      </div>
+      </div>
+
+    <div class="table" id="calDiv">
+      {{calendar}}
+    </div>
+  </div>
+{% endblock %}

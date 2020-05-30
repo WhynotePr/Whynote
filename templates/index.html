@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block body_block %}
+<div class="container">
+  <div class="jumbotron">
+    {% if user.is_authenticated %}
+        <h2>Here is site for authenticated users of whynote </h2>
+        
+    {% else %}
+        <h2>Here is site for not authenticated WHOnoters</h2>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

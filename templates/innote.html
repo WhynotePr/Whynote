@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title%}{{note.note_title}}{% endblock %}
+
+{% block content %}
+<h2 style="font-family: Montserrat">{{note.note_title}}</h2>
+<div class="container">
+<p style="font-family: Montserrat">{{note.note_text}}</p>
+
+<em style="font-family: Montserrat">{{note.public_date}}</em>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-md-center">
+	  <div class="col-5">
+	  	<div class="jumbotron">
+	      <h1>Login here:</h1>
+			<form method="post" action="{% url 'first:user_login' %}">
+	          {% csrf_token %}
+	          <div class="form-group">
+	            <label for="username">Username:</label>
+	            <input type="text" name="username" class="form-control" placeholder="Username">
+	          </div>
+	          <div class="form-group">
+				<label for="password">Password:</label>
+	            <input type="password" name="password" class="form-control" placeholder="Password">
+	        </div>
+			  <input type="submit" class="btn btn-outline-warning text-dark" name="" value="Login">
+			</form>
+		</div>
+	  </div>
+    </div>
+  </div>
+{% endblock %}

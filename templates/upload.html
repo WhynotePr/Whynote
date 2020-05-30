@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="container">
+  <div class="btn btn-warning left">
+    <a href="{% url 'first:home' %}" class="text-decoration-none text-dark">Back</a>
+  </div>
+  <div class="btn btn-warning left">
+    <a href="{% url 'first:book_list' %}" class="text-decoration-none text-dark">Books</a>
+  </div>
+</div>
+
+  <div class="uploadtitle">
+	<h2>Your files</h2>	
+  </div>
+
+  <div class="container my-4">
+  	<div class="row justify-content-center">
+	<form method="post" enctype="multipart/form-data" class="fileform">
+	{% csrf_token %}
+	  <div class="input-group mb-3">
+  		<div class="custom-file">
+	      <input type="file" name="document" class="custom-file-input" id="inputGroupFile02">
+	      <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">
+	        Choose file
+	      </label>
+		</div>
+		<button type="submit" class="btn btn-warning">Upload</button>
+	  </div>
+	</form>
+    </div>
+  </div>
+
+	<div class="files">
+		{% if url %}
+		  <p>Uloaded file: <a href="{{ url }}">{{url}}</a></p>
+		{% endif %}
+	</div>
+
+{% endblock %}

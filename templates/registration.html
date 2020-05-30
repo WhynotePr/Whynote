@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  <div class="container">
+    <div class="jumbotron">
+      <div class="row justify-content-md-center">
+        <div class="col-9">
+      {% if registered %}
+        <h1>Thank you for registering!</h1>
+      {% else %}
+        <h2 class="display-4">Register Here</h2>
+        <p class="lead">Just fill out the form.</p>
+        <form enctype="multipart/form-data" method="POST">
+          {% csrf_token %}
+          {{ user_form.as_p }}
+          <button type="submit" class="btn btn-outline-warning text-dark mb-2 left">Register</button>
+        </form>
+      {% endif %}
+    </div>
+    </div>
+    </div>
+  </div>
+{% endblock %}

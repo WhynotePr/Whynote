@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	<h2>Upload pdf-file</h2>
+
+	<div class="container my-4">
+  	  <div class="row justify-content-center">
+	    <form method="post" enctype="multipart/form-data">
+	      <table class="table table-borderless table-sm">
+		  	{% csrf_token %}
+	        <tr><td class="form-group">
+	        	{{ form }}
+	        </td></tr>
+	        <tr><td>
+	        <button type="submit" class="btn btn-warning">Upload</button>
+	        </td></tr>
+	      </table>
+	   </form>
+      </div>
+    </div>
+
+{% endblock %}
